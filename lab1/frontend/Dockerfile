@@ -1,9 +1,7 @@
-FROM node:12-alpine AS builder
+FROM node:12-alpine
 WORKDIR /usr/src/app
-COPY / ./
-RUN npm install && npm run build
-
-FROM nginx:alpine
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY . .
+EXPOSE 3000
+RUN npm install --silent
+RUN npm run build && npm install -g serve
+CMD ["serve", "-s", "build"]
