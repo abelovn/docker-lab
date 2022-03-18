@@ -1,0 +1,7 @@
+#!/bin/sh
+echo >> /backend/lib_catalog/settings.py && \
+echo CORS_ORIGIN_ALLOW_ALL = True >> /backend/lib_catalog/settings.py && \
+sed -i 's/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[\"\*\"\]/g' /backend/lib_catalog/settings.py && \
+echo 'All OK' && \
+grep "CORS_ORIGIN_ALLOW_ALL" /backend/lib_catalog/settings.py && \
+grep "ALLOWED_HOSTS" /backend/lib_catalog/settings.py
