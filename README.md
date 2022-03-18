@@ -1,3 +1,4 @@
+#!/bin/sh
 # docker-lab
 # FIRST TASK
 docker build -t my_app:my_app -f ./lab1/frontend/Dockerfile   ./lab1/frontend/ 
