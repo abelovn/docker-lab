@@ -1,7 +1,12 @@
-FROM node:12-alpine
-WORKDIR /usr/src/app
-COPY . .
-EXPOSE 3000
-RUN npm install --silent
-RUN npm run build && npm install -g serve
-CMD ["serve", "-s", "build"]
+FROM node:12-alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . /app
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD [ "nginx", "-g", "daemon off;" ]
