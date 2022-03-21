@@ -1,0 +1,42 @@
+version: '3.1'
+services:
+
+  frontend:
+    build: ./frontend
+    image: frontend_app
+    ports:
+      - 80:80
+    networks:
+      - frontend-net
+
+  backend:
+     build: ./lib_catalog
+     image: backend_app
+     ports:
+       - 8000:3000
+     depends_on:
+       - database
+     networks:
+       - backend-net
+
+  database:
+    image: postgres:14
+    restart: unless-stopped
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: django
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: django
+      PGDATA: /var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
+  frontend-net:
