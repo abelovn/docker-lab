@@ -2,7 +2,7 @@ version: '3.1'
 services:
 
   frontend:
-    build: ./frontend
+    build: ./lab1/frontend  
     image: frontend_app
     ports:
       - 80:80
@@ -10,7 +10,7 @@ services:
       - frontend-net
 
   backend:
-     build: ./lib_catalog
+     build: ./lab2/backend
      image: backend_app
      ports:
        - 8000:3000
