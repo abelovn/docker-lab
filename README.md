@@ -8,9 +8,7 @@ docker run -d -p 80:3000 --name my_front my_app:my_app
 # SECOND TASK
 docker network create backend-net
 
-docker run \
-  --name database \ 
-  --network=backend-net \
+docker run --name database --network=backend-net \
   -p 5432:5432 \
   -e POSTGRES_USER=django \
   -e POSTGRES_PASSWORD=django \
@@ -22,9 +20,7 @@ docker run \
 
 docker build   -t backend_app   -f ./lab2/backend/Dockerfile   ./lab2/backend/
 
-docker run \
-  --name backend \
-  --network=backend-net \
+docker run --name backend --network=backend-net \
   -p 8000:3000 \
   -d \
   -it \
