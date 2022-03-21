@@ -42,5 +42,5 @@ docker exec $(docker ps | grep "0.0.0.0:8000->3000/tcp" | awk {'print$1'}) /bin/
 
 docker exec $(docker ps | grep "0.0.0.0:8000->3000/tcp" | awk {'print$1'}) python manage.py migrate
 
-docker exec -it backend python manage.py createsuperuser
+docker exec -it $(docker ps | grep "0.0.0.0:8000->3000/tcp" | awk {'print$1'}) python manage.py createsuperuser
 
