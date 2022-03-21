@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-##
+
   frontend:
     build: ./lab1/frontend  
     image: frontend_app
