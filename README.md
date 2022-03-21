@@ -1,9 +1,9 @@
 #!/bin/sh
 # docker-lab
 # FIRST TASK
-docker build -t my_app:my_app -f ./lab1/frontend/Dockerfile   ./lab1/frontend/ 
+docker build -t fontend -f ./lab1/frontend/Dockerfile   ./lab1/frontend/ 
 
-docker run -d -p 80:3000 --name my_front my_app:my_app
+docker run -d -p 80:80 --name my_front my_app:my_app
 
 # SECOND TASK
 docker network create backend-net
